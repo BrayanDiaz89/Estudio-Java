@@ -29,6 +29,8 @@ public class Main {
             double noteStudent = keyboard.nextDouble();
             keyboard.nextLine();
 
+
+
             if(!(noteStudent < 0 || noteStudent > 5)){
                 String result = noteStudent >= 3 ? "Aprobado" : "Reprobado";
                 if(result.equals("Aprobado")){
