@@ -10,6 +10,7 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = {GenreMapper.class, ContentStatusMapper.class})
 public interface MovieMapper {
 
+    @Mapping(source = "id", target = "id")
     @Mapping(source = "titulo", target = "title")
     @Mapping(source = "duracion", target = "duration")
     @Mapping(source = "genero", target = "genre", qualifiedByName = "stringToGenre") //Con qualifiedByName llamamos al metodo que convierte el String a enum
