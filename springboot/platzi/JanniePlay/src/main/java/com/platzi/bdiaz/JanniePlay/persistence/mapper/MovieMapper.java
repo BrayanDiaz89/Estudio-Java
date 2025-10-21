@@ -1,7 +1,9 @@
 package com.platzi.bdiaz.JanniePlay.persistence.mapper;
 
+import com.platzi.bdiaz.JanniePlay.domain.dto.MovieRequestDTO;
 import com.platzi.bdiaz.JanniePlay.domain.dto.MovieResponseDTO;
 import com.platzi.bdiaz.JanniePlay.persistence.entitie.Movie;
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -10,7 +12,6 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = {GenreMapper.class, ContentStatusMapper.class})
 public interface MovieMapper {
 
-    @Mapping(source = "id", target = "id")
     @Mapping(source = "titulo", target = "title")
     @Mapping(source = "duracion", target = "duration")
     @Mapping(source = "genero", target = "genre", qualifiedByName = "stringToGenre") //Con qualifiedByName llamamos al metodo que convierte el String a enum
@@ -19,4 +20,13 @@ public interface MovieMapper {
     @Mapping(source = "contentStatus", target = "isAvailable", qualifiedByName = "stringToBoolean")
     MovieResponseDTO toDto(Movie movie);
     List<MovieResponseDTO> toDto(List<Movie> movies);
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(source = "title", target = "titulo")
+    @Mapping(source = "duration", target = "duracion")
+    @Mapping(source = "genre", target = "genero", qualifiedByName = "genreToString")
+    @Mapping(source = "rating", target = "calificacion")
+    @Mapping(source = "releaseDate", target = "fechaEstreno")
+    @Mapping(source = "isAvailable", target = "contentStatus", qualifiedByName = "booleanToString")
+    Movie toEntity(MovieRequestDTO requestDTO);
 }
