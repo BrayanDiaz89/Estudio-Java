@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CrudMovieEntity extends JpaRepository<Movie, Long> {
 
+    Boolean existsByTitle(String title);
 }

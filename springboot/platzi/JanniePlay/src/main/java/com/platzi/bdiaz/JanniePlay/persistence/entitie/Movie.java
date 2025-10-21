@@ -1,5 +1,6 @@
 package com.platzi.bdiaz.JanniePlay.persistence.entitie;
 
+import com.platzi.bdiaz.JanniePlay.domain.dto.MovieRequestDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,6 +33,5 @@ public class Movie {
     private LocalDate fechaEstreno;
     @Column(name = "estado", nullable = false, length = 1)
     private String contentStatus;
-
 
 }

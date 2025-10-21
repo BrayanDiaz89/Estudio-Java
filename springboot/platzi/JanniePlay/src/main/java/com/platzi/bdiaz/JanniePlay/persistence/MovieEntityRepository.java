@@ -1,8 +1,10 @@
 package com.platzi.bdiaz.JanniePlay.persistence;
 
+import com.platzi.bdiaz.JanniePlay.domain.dto.MovieRequestDTO;
 import com.platzi.bdiaz.JanniePlay.domain.dto.MovieResponseDTO;
 import com.platzi.bdiaz.JanniePlay.domain.repository.MovieRepository;
 import com.platzi.bdiaz.JanniePlay.persistence.crud.CrudMovieEntity;
+import com.platzi.bdiaz.JanniePlay.persistence.entitie.Movie;
 import com.platzi.bdiaz.JanniePlay.persistence.mapper.MovieMapper;
 import org.springframework.stereotype.Repository;
 
@@ -29,5 +31,16 @@ public class MovieEntityRepository implements MovieRepository {
          return this.crudMovieEntity.findById(id)
                  .map(movieMapper::toDto)
                  .orElse(null);
+    }
+
+    @Override
+    public Boolean existsByTitle(String title) {
+        return this.crudMovieEntity.existsByTitle(title);
+    }
+
+    @Override
+    public MovieResponseDTO save(MovieRequestDTO requestDTO) {
+        Movie movie = this.movieMapper.toEntity(requestDTO);
+        return this.movieMapper.toDto(this.crudMovieEntity.save(movie));
     }
 }
