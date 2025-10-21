@@ -41,8 +41,4 @@ public class MovieController {
         return ResponseEntity.created(uri).body(movieCreated);
     }
 
-    /*@PostMapping("/create")
-    public ResponseEntity<MovieResponseDTO> addMovie(@RequestBody @Valid MovieRequestDTO movieRequestDTO){
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.movieService.addMovie(movieRequestDTO));
-    }*/
 }
