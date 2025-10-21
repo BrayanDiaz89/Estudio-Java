@@ -2,10 +2,9 @@ package com.platzi.bdiaz.JanniePlay.persistence.mapper;
 
 import com.platzi.bdiaz.JanniePlay.domain.dto.MovieRequestDTO;
 import com.platzi.bdiaz.JanniePlay.domain.dto.MovieResponseDTO;
+import com.platzi.bdiaz.JanniePlay.domain.dto.UpdateMovieDTO;
 import com.platzi.bdiaz.JanniePlay.persistence.entitie.Movie;
-import org.mapstruct.InheritInverseConfiguration;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.*;
 
 import java.util.List;
 
@@ -29,4 +28,10 @@ public interface MovieMapper {
     @Mapping(source = "releaseDate", target = "fechaEstreno")
     @Mapping(source = "isAvailable", target = "contentStatus", qualifiedByName = "booleanToString")
     Movie toEntity(MovieRequestDTO requestDTO);
+
+    //@BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE) //Lo que viene null no se toca
+    @Mapping(target = "titulo", source = "title")
+    @Mapping(target = "fechaEstreno", source = "releaseDate")
+    @Mapping(target = "calificacion", source = "rating")
+    void updateMovie(UpdateMovieDTO updateMovieDTO, @MappingTarget Movie movie);
 }

@@ -2,7 +2,9 @@ package com.platzi.bdiaz.JanniePlay.web.controller;
 
 import com.platzi.bdiaz.JanniePlay.domain.dto.MovieRequestDTO;
 import com.platzi.bdiaz.JanniePlay.domain.dto.MovieResponseDTO;
+import com.platzi.bdiaz.JanniePlay.domain.dto.UpdateMovieDTO;
 import com.platzi.bdiaz.JanniePlay.domain.service.logic.MovieService;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +41,12 @@ public class MovieController {
         MovieResponseDTO movieCreated = movieService.addMovie(movieRequestDTO);
         URI uri = uriComponentsBuilder.path("/movies/{id}").buildAndExpand(movieCreated.id()).toUri();
         return ResponseEntity.created(uri).body(movieCreated);
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<MovieResponseDTO> updateMovie(@PathVariable Long id, @RequestBody @Valid UpdateMovieDTO updateMovieDTO){
+        return ResponseEntity.ok(this.movieService.updateMovie(id, updateMovieDTO));
     }
 
 }

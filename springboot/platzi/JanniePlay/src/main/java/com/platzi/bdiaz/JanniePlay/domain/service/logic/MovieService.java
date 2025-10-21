@@ -2,6 +2,7 @@ package com.platzi.bdiaz.JanniePlay.domain.service.logic;
 
 import com.platzi.bdiaz.JanniePlay.domain.dto.MovieRequestDTO;
 import com.platzi.bdiaz.JanniePlay.domain.dto.MovieResponseDTO;
+import com.platzi.bdiaz.JanniePlay.domain.dto.UpdateMovieDTO;
 import com.platzi.bdiaz.JanniePlay.domain.repository.MovieRepository;
 import com.platzi.bdiaz.JanniePlay.domain.service.logic.rules.ValidationCrudMovie;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,10 @@ public class MovieService {
     public MovieResponseDTO addMovie(MovieRequestDTO requestDTO){
         movieValidationRules.forEach(v-> v.validate(requestDTO));
         return this.movieRepository.save(requestDTO);
+    }
+
+    public MovieResponseDTO updateMovie(Long id, UpdateMovieDTO updateMovieDTO){
+        return this.movieRepository.updateMovie(id, updateMovieDTO);
     }
 
 }

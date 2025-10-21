@@ -2,6 +2,7 @@ package com.platzi.bdiaz.JanniePlay.persistence;
 
 import com.platzi.bdiaz.JanniePlay.domain.dto.MovieRequestDTO;
 import com.platzi.bdiaz.JanniePlay.domain.dto.MovieResponseDTO;
+import com.platzi.bdiaz.JanniePlay.domain.dto.UpdateMovieDTO;
 import com.platzi.bdiaz.JanniePlay.domain.repository.MovieRepository;
 import com.platzi.bdiaz.JanniePlay.persistence.crud.CrudMovieEntity;
 import com.platzi.bdiaz.JanniePlay.persistence.entitie.Movie;
@@ -42,5 +43,15 @@ public class MovieEntityRepository implements MovieRepository {
     @Override
     public Boolean existsByTitle(String title) {
         return this.crudMovieEntity.existsByTitulo(title);
+    }
+
+    @Override
+    public MovieResponseDTO updateMovie(Long id, UpdateMovieDTO updateMovieDTO) {
+        Movie movie = this.crudMovieEntity.findById(id).orElse(null);
+        if(movie == null) return null;
+        //Opción 1) movie.updateMovie(updateMovieDTO); mala práctica
+        //Opción 2, mejor práctica
+        this.movieMapper.updateMovie(updateMovieDTO, movie);
+        return this.movieMapper.toDto(crudMovieEntity.save(movie));
     }
 }

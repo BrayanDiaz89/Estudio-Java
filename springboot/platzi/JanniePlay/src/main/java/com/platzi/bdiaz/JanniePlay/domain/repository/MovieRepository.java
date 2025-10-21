@@ -2,6 +2,8 @@ package com.platzi.bdiaz.JanniePlay.domain.repository;
 
 import com.platzi.bdiaz.JanniePlay.domain.dto.MovieRequestDTO;
 import com.platzi.bdiaz.JanniePlay.domain.dto.MovieResponseDTO;
+import com.platzi.bdiaz.JanniePlay.domain.dto.UpdateMovieDTO;
+
 import java.util.List;
 
 
@@ -11,5 +13,6 @@ public interface MovieRepository {
     MovieResponseDTO findById(Long id);
     MovieResponseDTO save(MovieRequestDTO requestDTO);
     Boolean existsByTitle(String title);
+    MovieResponseDTO updateMovie(Long id, UpdateMovieDTO updateMovieDTO);
 
 }

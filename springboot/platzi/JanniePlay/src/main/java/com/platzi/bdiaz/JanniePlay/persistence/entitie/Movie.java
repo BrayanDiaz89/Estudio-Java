@@ -1,5 +1,6 @@
 package com.platzi.bdiaz.JanniePlay.persistence.entitie;
 
+import com.platzi.bdiaz.JanniePlay.domain.dto.UpdateMovieDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 
 @Entity
@@ -33,5 +35,14 @@ public class Movie {
     @Column(name = "estado", nullable = false, length = 1)
     private String contentStatus;
 
+    public void updateMovie(UpdateMovieDTO updateMovieDTO){
+        this.titulo = updateMovieDTO.title() == null
+                      ? this.titulo
+                      : updateMovieDTO.title();
+        this.fechaEstreno = updateMovieDTO.releaseDate() == null
+                      ? this.fechaEstreno
+                      : updateMovieDTO.releaseDate();
+        this.calificacion = BigDecimal.valueOf(updateMovieDTO.rating()).setScale(2, RoundingMode.HALF_UP);
+    }
 
 }
