@@ -40,4 +40,9 @@ public class MovieService {
         return this.movieRepository.updateMovie(id, updateMovieDTO);
     }
 
+    @Transactional
+    public void deleteMovie(Long id){
+        this.movieRepository.deleteMovie(id);
+    }
+
 }

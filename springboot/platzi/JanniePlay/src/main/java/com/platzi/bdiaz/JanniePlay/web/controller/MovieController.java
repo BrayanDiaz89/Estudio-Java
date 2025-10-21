@@ -48,4 +48,11 @@ public class MovieController {
         return ResponseEntity.ok(this.movieService.updateMovie(id, updateMovieDTO));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteMovie(@PathVariable Long id){
+        this.movieService.deleteMovie(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
 }

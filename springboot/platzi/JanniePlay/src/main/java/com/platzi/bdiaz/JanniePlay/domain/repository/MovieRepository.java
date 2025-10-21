@@ -14,5 +14,6 @@ public interface MovieRepository {
     MovieResponseDTO save(MovieRequestDTO requestDTO);
     Boolean existsByTitle(String title);
     MovieResponseDTO updateMovie(Long id, UpdateMovieDTO updateMovieDTO);
+    void deleteMovie(Long id);
 
 }
