@@ -6,10 +6,12 @@ import com.platzi.bdiaz.JanniePlay.domain.dto.UpdateMovieDTO;
 import com.platzi.bdiaz.JanniePlay.domain.repository.MovieRepository;
 import com.platzi.bdiaz.JanniePlay.domain.service.logic.rules.ValidationCrudMovie;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true) //Optimizamos las consultas que son de solo lectura, y no escritura en la db
 public class MovieService {
 
     private final MovieRepository movieRepository;
@@ -33,6 +35,7 @@ public class MovieService {
         return this.movieRepository.save(requestDTO);
     }
 
+    @Transactional
     public MovieResponseDTO updateMovie(Long id, UpdateMovieDTO updateMovieDTO){
         return this.movieRepository.updateMovie(id, updateMovieDTO);
     }
