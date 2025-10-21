@@ -33,7 +33,7 @@ public class MovieController {
         return (movieDto == null) ? ResponseEntity.notFound().build() : ResponseEntity.ok(movieDto);
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<MovieResponseDTO> addMovie(@RequestBody @Valid MovieRequestDTO movieRequestDTO,
                                                      UriComponentsBuilder uriComponentsBuilder){
         MovieResponseDTO movieCreated = movieService.addMovie(movieRequestDTO);
