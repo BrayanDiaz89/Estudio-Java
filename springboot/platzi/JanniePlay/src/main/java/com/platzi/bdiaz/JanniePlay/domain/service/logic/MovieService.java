@@ -5,6 +5,7 @@ import com.platzi.bdiaz.JanniePlay.domain.dto.MovieResponseDTO;
 import com.platzi.bdiaz.JanniePlay.domain.dto.UpdateMovieDTO;
 import com.platzi.bdiaz.JanniePlay.domain.repository.MovieRepository;
 import com.platzi.bdiaz.JanniePlay.domain.service.logic.rules.ValidationCrudMovie;
+import dev.langchain4j.agent.tool.Tool;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,7 @@ public class MovieService {
         this.movieValidationRules = movieValidationRules;
     }
 
+    @Tool("Busca todas las películas que existan dentro de la plataforma")
     public List<MovieResponseDTO> getAllMovies() {
         return this.movieRepository.getAll();
     }

@@ -2,9 +2,12 @@ package com.platzi.bdiaz.JanniePlay.web.controller;
 
 import com.platzi.bdiaz.JanniePlay.domain.dto.MovieRequestDTO;
 import com.platzi.bdiaz.JanniePlay.domain.dto.MovieResponseDTO;
+import com.platzi.bdiaz.JanniePlay.domain.dto.SuggestRequestDTO;
 import com.platzi.bdiaz.JanniePlay.domain.dto.UpdateMovieDTO;
+import com.platzi.bdiaz.JanniePlay.domain.service.ai.JanniePlayAIService;
 import com.platzi.bdiaz.JanniePlay.domain.service.logic.MovieService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -17,9 +20,16 @@ import java.util.List;
 public class MovieController {
 
     private final MovieService movieService;
+    private final JanniePlayAIService aiService;
 
-    public MovieController(MovieService movieService) {
+    public MovieController(MovieService movieService, JanniePlayAIService aiService) {
         this.movieService = movieService;
+        this.aiService = aiService;
+    }
+
+    @GetMapping("/home")
+    public ResponseEntity<String> greetingCommunity(@Value("${spring.application.name}") String namePlataform){
+        return ResponseEntity.ok(aiService.generateGreeting(namePlataform));
     }
 
     @GetMapping("/all")
@@ -39,6 +49,11 @@ public class MovieController {
         MovieResponseDTO movieCreated = movieService.addMovie(movieRequestDTO);
         URI uri = uriComponentsBuilder.path("/movies/{id}").buildAndExpand(movieCreated.id()).toUri();
         return ResponseEntity.created(uri).body(movieCreated);
+    }
+
+    @PostMapping("/suggest")
+    public ResponseEntity<String> generateMoviesSuggestion(@RequestBody SuggestRequestDTO suggestRequestDTO){
+        return ResponseEntity.ok(this.aiService.generateMoviesSuggestions(suggestRequestDTO.userPreferences()));
     }
 
     @PutMapping("/{id}")
@@ -62,5 +77,6 @@ public class MovieController {
     public ResponseEntity<MovieResponseDTO> activateMovie(@PathVariable Long id){
         return ResponseEntity.ok(this.movieService.activateMovie(id));
     }
+
 
 }
