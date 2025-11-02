@@ -35,14 +35,4 @@ public class Movie {
     @Column(name = "estado", nullable = false, length = 1)
     private String contentStatus;
 
-    public void updateMovie(UpdateMovieDTO updateMovieDTO){
-        this.titulo = updateMovieDTO.title() == null
-                      ? this.titulo
-                      : updateMovieDTO.title();
-        this.fechaEstreno = updateMovieDTO.releaseDate() == null
-                      ? this.fechaEstreno
-                      : updateMovieDTO.releaseDate();
-        this.calificacion = BigDecimal.valueOf(updateMovieDTO.rating()).setScale(2, RoundingMode.HALF_UP);
-    }
-
 }
