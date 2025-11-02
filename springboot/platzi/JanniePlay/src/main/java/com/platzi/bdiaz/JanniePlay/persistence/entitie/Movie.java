@@ -1,6 +1,5 @@
 package com.platzi.bdiaz.JanniePlay.persistence.entitie;
 
-import com.platzi.bdiaz.JanniePlay.domain.dto.UpdateMovieDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDate;
 
 @Entity
