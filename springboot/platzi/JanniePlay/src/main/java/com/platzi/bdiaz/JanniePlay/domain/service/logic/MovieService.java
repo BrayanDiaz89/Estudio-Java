@@ -30,6 +30,7 @@ public class MovieService {
         return this.movieRepository.findById(id);
     }
 
+    @Transactional
     public MovieResponseDTO addMovie(MovieRequestDTO requestDTO){
         movieValidationRules.forEach(v-> v.validate(requestDTO));
         return this.movieRepository.save(requestDTO);
@@ -43,6 +44,16 @@ public class MovieService {
     @Transactional
     public void deleteMovie(Long id){
         this.movieRepository.deleteMovie(id);
+    }
+
+    @Transactional
+    public void deactivateMovie(Long id){
+        this.movieRepository.deactivateMovieStatus(id);
+    }
+
+    @Transactional
+    public MovieResponseDTO activateMovie(Long id){
+        return this.movieRepository.activateMovieStatus(id);
     }
 
 }

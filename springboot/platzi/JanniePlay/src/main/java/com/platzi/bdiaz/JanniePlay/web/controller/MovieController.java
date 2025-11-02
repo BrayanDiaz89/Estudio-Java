@@ -4,9 +4,7 @@ import com.platzi.bdiaz.JanniePlay.domain.dto.MovieRequestDTO;
 import com.platzi.bdiaz.JanniePlay.domain.dto.MovieResponseDTO;
 import com.platzi.bdiaz.JanniePlay.domain.dto.UpdateMovieDTO;
 import com.platzi.bdiaz.JanniePlay.domain.service.logic.MovieService;
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -54,5 +52,15 @@ public class MovieController {
         return ResponseEntity.noContent().build();
     }
 
+    @DeleteMapping("/{id}/status")
+    public ResponseEntity deactivateMovie(@PathVariable Long id){
+        this.movieService.deactivateMovie(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<MovieResponseDTO> activateMovie(@PathVariable Long id){
+        return ResponseEntity.ok(this.movieService.activateMovie(id));
+    }
 
 }

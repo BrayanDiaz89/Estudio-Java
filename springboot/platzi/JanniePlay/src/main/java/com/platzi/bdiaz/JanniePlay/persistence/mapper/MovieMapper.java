@@ -26,7 +26,7 @@ public interface MovieMapper {
     @Mapping(source = "genre", target = "genero", qualifiedByName = "genreToString")
     @Mapping(source = "rating", target = "calificacion")
     @Mapping(source = "releaseDate", target = "fechaEstreno")
-    @Mapping(source = "isAvailable", target = "contentStatus", qualifiedByName = "booleanToString")
+    @Mapping(source = "isAvailable", target = "contentStatus", qualifiedByName = "booleanToString", defaultValue = "true")
     Movie toEntity(MovieRequestDTO requestDTO);
 
     //@BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE) //Lo que viene null no se toca
@@ -34,4 +34,5 @@ public interface MovieMapper {
     @Mapping(target = "fechaEstreno", source = "releaseDate")
     @Mapping(target = "calificacion", source = "rating")
     void updateMovie(UpdateMovieDTO updateMovieDTO, @MappingTarget Movie movie);
+
 }

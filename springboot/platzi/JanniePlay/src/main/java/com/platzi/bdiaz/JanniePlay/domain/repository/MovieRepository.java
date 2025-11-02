@@ -15,5 +15,7 @@ public interface MovieRepository {
     Boolean existsByTitle(String title);
     MovieResponseDTO updateMovie(Long id, UpdateMovieDTO updateMovieDTO);
     void deleteMovie(Long id);
+    void deactivateMovieStatus(Long id);
+    MovieResponseDTO activateMovieStatus(Long id);
 
 }

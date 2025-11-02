@@ -65,4 +65,21 @@ public class MovieEntityRepository implements MovieRepository {
         }
     }
 
+    @Override
+    public void deactivateMovieStatus(Long id){
+        Movie movie = crudMovieEntity.findById(id).orElse(null);
+        if(movie != null && !"N".equalsIgnoreCase(movie.getContentStatus())){
+            this.crudMovieEntity.deactivateStatusMovie(id);
+        }
+    }
+
+    @Override
+    public MovieResponseDTO activateMovieStatus(Long id) {
+        Movie movie = crudMovieEntity.findById(id).orElse(null);
+        if(movie == null) return null;
+        if(!"D".equalsIgnoreCase(movie.getContentStatus())){
+            movie.setContentStatus("D");
+        }
+        return this.movieMapper.toDto(movie);
+    }
 }
