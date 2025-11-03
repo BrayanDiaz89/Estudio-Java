@@ -3,8 +3,10 @@ package com.platzi.bdiaz.JanniePlay.domain.service.logic;
 import com.platzi.bdiaz.JanniePlay.domain.dto.MovieRequestDTO;
 import com.platzi.bdiaz.JanniePlay.domain.dto.MovieResponseDTO;
 import com.platzi.bdiaz.JanniePlay.domain.dto.UpdateMovieDTO;
+import com.platzi.bdiaz.JanniePlay.domain.exception.MovieNotFoundException;
 import com.platzi.bdiaz.JanniePlay.domain.repository.MovieRepository;
 import com.platzi.bdiaz.JanniePlay.domain.service.logic.rules.ValidationCrudMovie;
+import com.platzi.bdiaz.JanniePlay.persistence.entitie.Movie;
 import dev.langchain4j.agent.tool.Tool;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,7 +31,11 @@ public class MovieService {
     }
 
     public MovieResponseDTO getMovieById(Long id) {
-        return this.movieRepository.findById(id);
+        MovieResponseDTO movie = this.movieRepository.findById(id);
+        if(movie == null){
+            throw new MovieNotFoundException(id);
+        }
+        return movie;
     }
 
     @Transactional

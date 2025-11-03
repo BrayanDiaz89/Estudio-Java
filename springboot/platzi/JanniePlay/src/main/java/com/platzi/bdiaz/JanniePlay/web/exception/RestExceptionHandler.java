@@ -1,5 +1,6 @@
 package com.platzi.bdiaz.JanniePlay.web.exception;
 
+import com.platzi.bdiaz.JanniePlay.domain.exception.MovieNotFoundException;
 import com.platzi.bdiaz.JanniePlay.domain.exception.TitleMovieAlreadyExistsException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -25,6 +26,11 @@ public class RestExceptionHandler {
             errors.add(new ErrorResponseDTO(e.getField(), e.getDefaultMessage()));
         });
         return ResponseEntity.badRequest().body(errors);
+    }
+
+    @ExceptionHandler(MovieNotFoundException.class)
+    public ResponseEntity<ErrorResponseDTO> handleException404(MovieNotFoundException ex){
+        return ResponseEntity.notFound().build();
     }
 
     @ExceptionHandler(Exception.class)
