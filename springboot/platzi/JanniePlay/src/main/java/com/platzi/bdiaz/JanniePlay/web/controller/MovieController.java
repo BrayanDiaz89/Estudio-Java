@@ -52,7 +52,9 @@ public class MovieController {
                     @ApiResponse(responseCode = "404", description = "Movie not found", content = @Content)
             }
     )
-    public ResponseEntity<MovieResponseDTO> getMovieById(@Parameter(description = "identificador de la película a recuperar.", example = "9")
+    public ResponseEntity<MovieResponseDTO> getMovieById(@Parameter(
+                                                                description = "identificador de la película a recuperar.",
+                                                                example = "9")
                                                          @PathVariable Long id) {
         var movieDto = this.movieService.getMovieById(id);
         return ResponseEntity.ok(movieDto);
