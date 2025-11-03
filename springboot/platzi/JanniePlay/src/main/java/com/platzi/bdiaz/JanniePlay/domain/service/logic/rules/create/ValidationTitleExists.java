@@ -3,6 +3,7 @@ package com.platzi.bdiaz.JanniePlay.domain.service.logic.rules.create;
 import com.platzi.bdiaz.JanniePlay.domain.dto.MovieRequestDTO;
 import com.platzi.bdiaz.JanniePlay.domain.repository.MovieRepository;
 import com.platzi.bdiaz.JanniePlay.domain.service.logic.rules.ValidationCrudMovie;
+import com.platzi.bdiaz.JanniePlay.domain.exception.TitleMovieAlreadyExistsException;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,7 +18,7 @@ public class ValidationTitleExists implements ValidationCrudMovie {
     @Override
     public void validate(MovieRequestDTO movieRequestDTO) {
         if(movieRepository.existsByTitle(movieRequestDTO.title())){
-            throw new IllegalArgumentException("Title already exists");
+            throw new TitleMovieAlreadyExistsException(movieRequestDTO.title());
         }
     }
 }
