@@ -52,7 +52,7 @@ public class MovieController {
     }
 
     @PostMapping("/suggest")
-    public ResponseEntity<String> generateMoviesSuggestion(@RequestBody SuggestRequestDTO suggestRequestDTO){
+    public ResponseEntity<String> generateMoviesSuggestion(@RequestBody @Valid SuggestRequestDTO suggestRequestDTO){
         return ResponseEntity.ok(this.aiService.generateMoviesSuggestions(suggestRequestDTO.userPreferences()));
     }
 
@@ -77,6 +77,5 @@ public class MovieController {
     public ResponseEntity<MovieResponseDTO> activateMovie(@PathVariable Long id){
         return ResponseEntity.ok(this.movieService.activateMovie(id));
     }
-
 
 }
