@@ -45,7 +45,7 @@ public class MovieController {
 
     @GetMapping("/{id}")
     @Operation(
-            summary = "Ger a movie by id",
+            summary = "Get a movie by id",
             description = "Returns a movie that matches the identifier sent.",
             responses = {
                     @ApiResponse(responseCode = "200", description = "Found movie"),
