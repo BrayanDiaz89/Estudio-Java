@@ -45,11 +45,18 @@ public class MovieController {
 
     @GetMapping("/{id}")
     @Operation(
-            summary = "Ger a movie by id",
+            summary = "Get a movie by id",
             description = "Returns a movie that matches the identifier sent.",
             responses = {
                     @ApiResponse(responseCode = "200", description = "Found movie"),
                     @ApiResponse(responseCode = "404", description = "Movie not found", content = @Content)
+            },
+            parameters = {
+                    @Parameter(
+                            name = "id",
+                            description = "identificador de la película a recuperar.",
+                            example = "9"
+                    )
             }
     )
     public ResponseEntity<MovieResponseDTO> getMovieById(@Parameter(

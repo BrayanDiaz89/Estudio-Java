@@ -6,7 +6,6 @@ import com.platzi.bdiaz.JanniePlay.domain.dto.UpdateMovieDTO;
 import com.platzi.bdiaz.JanniePlay.domain.exception.MovieNotFoundException;
 import com.platzi.bdiaz.JanniePlay.domain.repository.MovieRepository;
 import com.platzi.bdiaz.JanniePlay.domain.service.logic.rules.ValidationCrudMovie;
-import com.platzi.bdiaz.JanniePlay.persistence.entitie.Movie;
 import dev.langchain4j.agent.tool.Tool;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
